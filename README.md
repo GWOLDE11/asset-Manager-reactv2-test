@@ -23,10 +23,10 @@ Clone or download  https://github.com/GWOLDE11/asset-Manager-reactv2-test.git
 
 $ cd asset-Manager-reactv2-test
 
-#running the test on Firefox
+# running the test on Firefox
 
 $ gradle clean test -DbrowserType=firefox
 
-#running the test on google chrome
+# running the test on google chrome
 
 $ gradle clean test -DbrowserType=googlechrome
