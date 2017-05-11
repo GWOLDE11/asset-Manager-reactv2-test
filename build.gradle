@@ -15,6 +15,9 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "http://repo.maven.apache.org/maven2" }
+    flatDir {
+        dirs "$rootProject.projectDir/libs"
+    }
 }
 
 dependencies {
@@ -28,6 +31,8 @@ dependencies {
     compile("org.uncommons:reportng:1.1.4") {
         exclude group: "org.testng", module: "testng"
     }
+   compile files('libs/ATUReporter_Selenium_testNG_5.1.1.jar')
+
 }
 
 test {

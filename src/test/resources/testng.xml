@@ -1,12 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test runner" parallel="classes" >
+<suite name="Test runner" parallel="classes">
+    <listeners>
+        <listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+        <listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+        <listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+
+    </listeners>
+
     <parameter name="webClientHost" value="dev"/>
     <parameter name="screenShotPath" value="/screenShot/"/>
     <parameter name="validUserName" value="test123@gmail.com"/>
     <test name="Asset Manager Integration Test">
         <groups>
             <run>
-                <include name="smoke" />
+                <include name="smoke"/>
             </run>
         </groups>
         <classes>

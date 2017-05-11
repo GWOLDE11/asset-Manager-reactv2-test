@@ -1,5 +1,8 @@
 package com.gwolde.assetmanager.test;
 
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
 import com.gwolde.assetmanager.page.AssetManager;
 import com.gwolde.assetmanager.utils.AssetManagerUtil;
 import org.apache.commons.io.FileUtils;
@@ -31,6 +34,12 @@ import java.util.Map;
  */
 public abstract class BaseTest {
 
+    static {
+
+        System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
+    }
+
+
     private String screenShotPath;
     private int failedTest = 0;
     private Long timeout = 15000L;
@@ -59,7 +68,7 @@ public abstract class BaseTest {
             if (browserType != null) {
                 driverFor(BrowserType.getBrowserType(browserType));
 
-            }else{
+            } else {
                 driverFor(BrowserType.FIREFOX);
             }
             assetManagerUtil = AssetManagerUtil.getInstance(driver);
@@ -68,7 +77,11 @@ public abstract class BaseTest {
             else
                 assetManager = launchAssetManager("localhost");
         } catch (Exception e) {
-            e.printStackTrace();
+
+            ATUReports.add("Server is not available", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
+            System.out.println(e.getMessage());
+            driver.quit();
+            System.exit(-100);
         }
     }
 
@@ -103,7 +116,7 @@ public abstract class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications");
                 //if (browserName.equals(BrowserType.MAC)) ;
-               // options.setBinary(macBinary);
+                // options.setBinary(macBinary);
                 driver = new ChromeDriver(options);
                 break;
             case IEXPLORE:
@@ -123,9 +136,10 @@ public abstract class BaseTest {
      */
     @AfterSuite(alwaysRun = true)
     public void afterSuite() throws WebDriverException {
-        if(driver != null) {
-            driver.close();
+        if (driver != null) {
             driver.quit();
+            if (driver != null)
+                driver = null;
         }
     }
 
@@ -144,6 +158,7 @@ public abstract class BaseTest {
                 String failureImageFileName = result.getMethod().getMethodName() + getFormattedDate() + ".png";
                 String destFile = screenShotPath + "/" + failureImageFileName;
                 FileUtils.copyFile(imageFile, new File(destFile));
+                ATUReports.add(result.getMethod().getMethodName(), LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.BROWSER_PAGE));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -165,7 +180,7 @@ public abstract class BaseTest {
      * @param host web client host de, demo or localhost
      * @return returns the Login page
      */
-    public AssetManager launchAssetManager(String host) {
+    public AssetManager launchAssetManager(String host) throws Exception {
 
         if (host.indexOf("dev") >= 0 || host.indexOf("demo") >= 0) {
             if (!host.startsWith("https"))
@@ -206,10 +221,10 @@ public abstract class BaseTest {
         }
 
 
-        public static BrowserType getBrowserType(String type){
+        public static BrowserType getBrowserType(String type) {
 
-            for(BrowserType t : BrowserType.values()){
-                if(t.getType().equals(type))
+            for (BrowserType t : BrowserType.values()) {
+                if (t.getType().equals(type))
                     return t;
             }
             return null;

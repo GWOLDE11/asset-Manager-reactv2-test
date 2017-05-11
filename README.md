@@ -35,8 +35,8 @@ https://github.com/neerajk1208/asset-manager-reactv2
 
     # running the test on Firefox
 
-    $ gradle clean test -DbrowserType=firefox
+        $ gradle clean test -DbrowserType=firefox
 
     # running the test on google chrome
 
-    $ gradle clean test -DbrowserType=googlechrome
+        $ gradle clean test -DbrowserType=googlechrome

@@ -1,8 +1,6 @@
 package com.gwolde.assetmanager.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
@@ -13,30 +11,29 @@ import java.util.List;
 public class AssetManagerUtil {
 
     private static AssetManagerUtil assetManagerUtil;
-    private  static WebDriver driver = null;
+    private static WebDriver driver = null;
 
 
-    private AssetManagerUtil(WebDriver driver){
-       this.driver = driver;
+    private AssetManagerUtil(WebDriver driver) {
+        this.driver = driver;
     }
 
 
-    public  static AssetManagerUtil getInstance(WebDriver driver){
+    public static AssetManagerUtil getInstance(WebDriver driver) {
 
-        if(assetManagerUtil == null )
+        if (assetManagerUtil == null)
             assetManagerUtil = new AssetManagerUtil(driver);
         return assetManagerUtil;
     }
 
 
-    public static List<WebElement> findElements(By by){
+    public static List<WebElement> findElements(By by) {
 
         return driver.findElements(by);
     }
 
 
-
-    public static WebElement findElement(By by){
+    public static WebElement findElement(By by) {
 
         return driver.findElement(by);
     }
@@ -55,16 +52,39 @@ public class AssetManagerUtil {
 
     public static void setRange(WebElement el, int val) {
 
+        /*
+        for i in range(10):
+  slider.send_keys(Keys.RIGHT)
+         */
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:document.getElementsByName('risk')[0].value=0;");
+
+        for (int i = 0; i < val; i++) {
+            el.sendKeys(Keys.ARROW_RIGHT);
+        }
+/*
         int minVal = Integer.valueOf(el.getAttribute("min"));
         int maxVal = Integer.valueOf(el.getAttribute("max"));
-        int v = Math.max(minVal, maxVal);
 
         int width = el.getSize().width;
-        int target = width * v;
+        System.out.println("Width " + width);
+        int range = width / (maxVal - minVal);
+        System.out.println("Range " + range);
+        int target = range * val / 10;
         Actions action = new Actions(driver);
-        action.moveToElement(el, target, 1);
-        action.click();
-        action.perform();
+        System.out.println(target);
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:document.getElementsByName('risk')[0].value=0;");
+        js.executeScript("arguments[0].value = arguments[1];", el, val);
+        action.dragAndDropBy(el, val, 0).build().perform();
+        */
+
+    }
+
+    public WebElement expandShadowRoot(WebElement shadowRootElement) {
+        WebElement shdowTreeParent = (WebElement) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].shadowRoot", shadowRootElement);
+        return shdowTreeParent;
     }
 
 }

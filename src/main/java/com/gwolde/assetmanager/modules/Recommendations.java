@@ -18,32 +18,40 @@ public class Recommendations {
 
     private Map<String, WebElement> suggestion = new HashMap<>();
 
-    public Recommendations(){
+    public Recommendations() {
 
         recomendations = AssetManagerUtil.findElements(By.className("list-group-item"));
     }
 
     /**
      * Get the Recommendation for specific category
+     *
      * @param categories category whic we want get recommendation
      * @return the recommendation for the category or null if there is none
      */
 
-    public String getRecommendation(Categories categories){
-
-        for(WebElement rec : recomendations){
-            String recommendation = rec.getText();
-            if(recommendation.indexOf(categories.getLable().toLowerCase()) >= 0) {
-                return recommendation;
+    public int getRecommendation(Categories categories) {
+        try {
+            recomendations = AssetManagerUtil.findElements(By.className("list-group-item"));
+        } catch (Exception e) {
+            recomendations = null;
+        }
+        if (recomendations != null) {
+            for (WebElement rec : recomendations) {
+                String recommend = rec.getText();
+                if (recommend.indexOf(categories.getLable().toLowerCase()) >= 0) {
+                    String value = recommend.substring(recommend.indexOf("by") + 2, recommend.indexOf('%')).trim();
+                    return Integer.parseInt(value);
+                }
             }
         }
-        return null;
+        return -1;
     }
 
 
-    public String toString(){
+    public String toString() {
         String recommendation = "";
-        for(WebElement rec : recomendations){
+        for (WebElement rec : recomendations) {
             recommendation += rec.getText() + "\n";
         }
         return recommendation;

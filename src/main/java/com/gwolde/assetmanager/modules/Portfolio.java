@@ -20,23 +20,29 @@ public class Portfolio {
     private Map<String, WebElement> inputs = new HashMap<>();
     private WebDriver driver;
 
-    public Portfolio(){
+    public Portfolio() {
+
         categories = AssetManagerUtil.findElements(By.xpath("//input[@type='text']"));
         submit = AssetManagerUtil.findElement(By.xpath("//input[@type='submit']"));
 
-        for(WebElement input : categories){
-            inputs.put(input.getAttribute("placeholder"), input);
+        for (WebElement input : categories) {
+            inputs.put(input.getAttribute("placeholder").toLowerCase(), input);
         }
     }
 
-    public void setCategory(Categories label, int value){
-        inputs.get(label.getLable()).clear();
-        inputs.get(label.getLable()).sendKeys(String.valueOf(value));
+    public void setCategory(Categories label, int value) {
+        inputs.get(label.getLable().toLowerCase()).clear();
+        inputs.get(label.getLable().toLowerCase()).sendKeys(String.valueOf(value));
+
+    }
+
+    public void setCategories(Categories[] label, int[] value) {
+
 
     }
 
 
-    public Recommendations submit(){
+    public Recommendations submit() {
         submit.click();
         return new Recommendations();
     }
