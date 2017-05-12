@@ -30,18 +30,34 @@ public class Portfolio {
         }
     }
 
+    /**
+     * Set the portfolio text field value
+     * @param label the portfolio category
+     * @param value the value to set the category text field
+     */
     public void setCategory(Categories label, int value) {
         inputs.get(label.getLable().toLowerCase()).clear();
         inputs.get(label.getLable().toLowerCase()).sendKeys(String.valueOf(value));
 
     }
 
-    public void setCategories(Categories[] label, int[] value) {
-
-
+    /**
+     * Set the portfolios  text fields values
+     * @param labels array of portfolio labels
+     * @param values array portfolio of values
+     */
+    public void setCategories(Categories[] labels, int[] values) {
+        int i = 0;
+        for(Categories c : labels){
+            setCategory(c, values[i]);
+            i++;
+        }
     }
 
-
+    /**
+     * Submit current portfolio
+     * @return Recommendation
+     */
     public Recommendations submit() {
         submit.click();
         return new Recommendations();

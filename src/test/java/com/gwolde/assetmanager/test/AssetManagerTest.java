@@ -25,7 +25,7 @@ public class AssetManagerTest extends BaseTest {
 
         Map<Integer, int[]> risk = new HashMap();
         //risk.put(risk, {Bonds, Stocks,ETFs,Real Estate,Cash})
-        risk.put(1, new int[]{10, 0, 0, 0, 80});
+        risk.put(1, new int[]{10, 0, 0, 0, 90});
         risk.put(2, new int[]{10, 10, 0, 0, 80});
         risk.put(3, new int[]{10, 10, 10, 0, 70});
         risk.put(4, new int[]{20, 10, 10, 0, 60});
@@ -52,6 +52,21 @@ public class AssetManagerTest extends BaseTest {
                 {0, 0, 0, 0, 10000000, 10}
         };
     }
+
+    @Test(dataProvider = "portfolio", groups = {"smoke", "android"},
+            description = "Asset manager update portfolio test", priority = 0)
+    public void updatePortfolioTest(int[] values) throws Exception {
+        int index = values[values.length - 1];
+
+        Recommendations recommendations = assetManager.getRecommendations(Categories.values(), values);
+        for (Categories cat : Categories.values()) {
+            int expected = ExpectedRecommendations.getExpectedValues(index, cat);
+            int actual = recommendations.getRecommendation(cat);
+            Assert.assertEquals(actual, expected,
+                    String.format("Actual recommendation for  %s  %d != %d ", cat.getLable(), actual, expected));
+        }
+    }
+
 
 
     @Test(dataProvider = "riskProfileExpected", groups = {"smoke", "android"},
@@ -89,19 +104,6 @@ public class AssetManagerTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "portfolio", groups = {"smoke", "android"},
-            description = "Asset manager update portfolio test")
-    public void updatePortfolioTest(int[] values) throws Exception {
-        int index = values[values.length - 1];
-
-        Recommendations recommendations = assetManager.getRecommendations(Categories.values(), values);
-        for (Categories cat : Categories.values()) {
-            int expected = ExpectedRecommendations.getExpectedValues(index, cat);
-            int actual = recommendations.getRecommendation(cat);
-            Assert.assertEquals(actual, expected,
-                    String.format("Actual recommendation for  %s  %d != %d ", cat.getLable(), actual, expected));
-        }
-    }
 
 
     /**

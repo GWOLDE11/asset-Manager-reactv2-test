@@ -54,20 +54,31 @@ public class PieChart {
         return Integer.parseInt(strValue.substring(0, strValue.indexOf('%')));
     }
 
+    /**
+     * Get the risk profile
+     * @return the the risk profile
+     */
     public int getRiskProfile() {
         return Integer.parseInt(riskLabel.getText().trim());
     }
 
-
+    /**
+     * Set the risk profile
+     * @param range rris profile range value
+     */
     public void setRiskProfile(int range) {
 
         AssetManagerUtil.setRange(riskSlider, range);
 
     }
 
-
+    /**
+     * Get the risk profile value from the label
+     * @param cat the category which
+     * @return category label value
+     */
     public int getLebelValue(Categories cat) {
-        return profileLables.getLebelValue(cat);
+        return profileLables.getLabelValues(cat);
     }
 
 }

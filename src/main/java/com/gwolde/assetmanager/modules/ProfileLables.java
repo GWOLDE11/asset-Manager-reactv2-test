@@ -26,8 +26,13 @@ public class ProfileLables {
         cash = AssetManagerUtil.findElement(By.xpath("//span[@data-test-id='cash']/span[2]"));
     }
 
+    /**
+     * Get portfolio value for Category
+     * @param cat the category
+     * @return the portfolio value
+     */
 
-    public int getLebelValue(Categories cat) {
+    public int getLabelValues(Categories cat) {
         switch (cat) {
             case BONDS:
                 return Integer.parseInt(bonds.getText().trim());

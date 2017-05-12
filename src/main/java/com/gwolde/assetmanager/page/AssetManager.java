@@ -45,6 +45,7 @@ public class AssetManager {
     }
 
     /**
+     * Set slider range value
      * @param value
      */
     public void setRiskRange(int value) {
