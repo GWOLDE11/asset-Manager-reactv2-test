@@ -1,0 +1,45 @@
+/* BUTTON STYLING - currently not being rendered */
+
+.button {
+  border: 1px solid gray;
+  padding: 2px;
+}
+
+.button:hover {
+  background-color: gray;
+}
+
+/* STYLING AND POSITIONING OF THE CHART */
+
+.chart-container {
+  display: inline-block;
+  width: 60%;
+  height: 40%;
+  border: 1px dotted gray;
+  padding: 2px;
+}
+
+#doughnut {
+  display: inline-block;
+  float: right;
+}
+
+/* HEADER DISPLAYS */
+
+h2 {
+  margin-left: 5%;
+}
+
+/* PORTFOLIO POSITIONING */
+
+.portfolio {
+  margin-left: 5%;
+}
+
+/* RECOMMENDATIONS POSITIONING */
+
+md-list {
+  display: inline-block;
+  float: left;
+  margin-left: 5%;
+}
