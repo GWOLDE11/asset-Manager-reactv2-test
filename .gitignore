@@ -1,0 +1,14 @@
+**/build
+**/TestResult
+**/node_modules
+**/dist
+.idea
+**/yarn.lock
+**/.idea
+**/.idea
+**/.idea
+**/.idea
+**/.idea
+**/.idea
+**/.idea
+**/.gradle
