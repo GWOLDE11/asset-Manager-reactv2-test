@@ -48,7 +48,8 @@
     "rimraf": "^2.4.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.9.1"
+    "webpack-hot-middleware": "^2.9.1",
+    "react-d3": "^0.4.0"
   },
   "dependencies": {
     "react": "^0.14.7",
