@@ -6,7 +6,7 @@
         <listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
 
     </listeners>
-
+    <parameter name="browser" value="firefox" />
     <parameter name="webClientHost" value="dev"/>
     <parameter name="screenShotPath" value="/screenShot/"/>
     <parameter name="validUserName" value="test123@gmail.com"/>
