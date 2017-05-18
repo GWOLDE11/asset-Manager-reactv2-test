@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by gwolde11 on 4/23/17.
  */
-public class PieChart {
+public class Piechart {
 
     private WebElement riskButton;
     private WebElement riskLabel;
@@ -25,7 +25,7 @@ public class PieChart {
      * Constructs a Piechart
      */
 
-    public PieChart() {
+    public Piechart() {
 
         riskButton = AssetManagerUtil.findElement(By.xpath("//button[@type='button']"));
         riskLabel = AssetManagerUtil.findElement(By.className("badge"));

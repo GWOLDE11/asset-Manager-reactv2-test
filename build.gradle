@@ -43,8 +43,8 @@ test {
         def deviceName = System.getProperty("deviceName")
         def timeStamp = System.getProperty("timeStamp")
         scanForTestClasses = false
-        options.listeners << 'org.uncommons.reportng.HTMLReporter'
-        options.listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+       options.listeners << 'org.uncommons.reportng.HTMLReporter'
+       options.listeners << 'org.uncommons.reportng.JUnitXMLReporter'
         useDefaultListeners = false
         suites 'src/test/resources/testng.xml'
         reports.html.destination = file('build/test-output/' +  getDate() + File.separator)

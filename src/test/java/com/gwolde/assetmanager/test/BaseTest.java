@@ -2,6 +2,7 @@ package com.gwolde.assetmanager.test;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import com.gwolde.assetmanager.page.AssetManager;
 import com.gwolde.assetmanager.utils.AssetManagerUtil;
@@ -36,7 +37,7 @@ public abstract class BaseTest {
 
     static {
 
-        System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
+        System.setProperty("atu.reporter.config", "/Users/gwolde11/workspace/asset-Manager-reactv2-test/src/test/resources/atu.properties");
     }
 
 
@@ -57,6 +58,7 @@ public abstract class BaseTest {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(ITestContext context) throws IOException {
         Map<String, String> parameters = context.getSuite().getXmlSuite().getParameters();
+        ATUReports.setAuthorInfo("Gwolde", Utils.getCurrentTime(),"1.0");
 
         try {
             screenShotPath = new File(context.getOutputDirectory() +

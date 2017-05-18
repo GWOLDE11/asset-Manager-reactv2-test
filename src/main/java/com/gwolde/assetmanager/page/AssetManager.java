@@ -1,7 +1,7 @@
 package com.gwolde.assetmanager.page;
 
 import com.gwolde.assetmanager.enums.Categories;
-import com.gwolde.assetmanager.modules.PieChart;
+import com.gwolde.assetmanager.modules.Piechart;
 import com.gwolde.assetmanager.modules.Portfolio;
 import com.gwolde.assetmanager.modules.Recommendations;
 import com.gwolde.assetmanager.utils.AssetManagerUtil;
@@ -15,7 +15,7 @@ public class AssetManager {
 
     private WebElement range;
 
-    public PieChart piechart;
+    public Piechart piechart;
 
     public Portfolio portfolio;
 
@@ -25,7 +25,7 @@ public class AssetManager {
 
         range = AssetManagerUtil.findElement(By.name("risk"));
 
-        piechart = new PieChart();
+        piechart = new Piechart();
         portfolio = new Portfolio();
     }
 
@@ -50,7 +50,7 @@ public class AssetManager {
      */
     public void setRiskRange(int value) {
         AssetManagerUtil.setRange(range, value);
-        piechart = new PieChart();
+        piechart = new Piechart();
     }
 
 

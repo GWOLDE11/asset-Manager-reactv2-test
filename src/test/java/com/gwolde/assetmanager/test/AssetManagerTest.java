@@ -26,7 +26,7 @@ public class AssetManagerTest extends BaseTest {
 
         Map<Integer, int[]> risk = new HashMap();
         //risk.put(risk, {Bonds, Stocks,ETFs,Real Estate,Cash})
-        risk.put(1, new int[]{10, 0, 0, 0, 90});
+        risk.put(1, new int[]{10, 0, 0, 0, 80});
         risk.put(2, new int[]{10, 10, 0, 0, 80});
         risk.put(3, new int[]{10, 10, 10, 0, 70});
         risk.put(4, new int[]{20, 10, 10, 0, 60});
@@ -60,6 +60,7 @@ public class AssetManagerTest extends BaseTest {
     public void riskProfileLookLikePieChartTest(int risk, Map<Integer, int[]> expectedValues) throws Exception {
         int index = 0;
         assetManager.setRiskRange(risk);
+//        ATUReports.add("Set Risk Value", String.valueOf(risk),);
         for (Categories cat : Categories.values()) {
             int actualPiChartValue = assetManager.piechart.getChartValue(cat);
             int expected = expectedValues.get(Integer.valueOf(risk))[index];
